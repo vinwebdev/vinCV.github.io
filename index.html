@@ -35,7 +35,7 @@
         display: flex;
       flex-direction: column;
        /* 🌈 Animated gradient background */
-      background: linear-gradient(135deg, #091520, #032325, #638989);
+         background: linear-gradient(135deg, #75a8d8, #032325, #0f1e1e);
       background-size: 300% 300%;
       animation: gradientFade 12s ease-in-out infinite alternate;
       transition: all 1s ease-in-out;
@@ -44,7 +44,7 @@
     @keyframes gradientFade {
       0% {
         background-position: 0% 50%;
-        background-color: #091520;
+        background-color: #75a8d8;
       }
       50% {
         background-position: 100% 50%;
@@ -52,7 +52,7 @@
       }
       100% {
         background-position: 0% 50%;
-        background-color:  #638989;
+        background-color: #0f1e1e;
       }
     }
   
@@ -298,7 +298,70 @@
             background-color: #004080;
             transform: translateY(-2px); /* small lift effect */
     }
+/* ======= Floating Messenger/WhatsApp======= */
+      /* Floating Chat Buttons */
+      .chat-float {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        z-index: 9999;
+      }
 
+      /* Chat Button */
+      .chat-btn {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 55px;
+        height: 55px;
+        border-radius: 50px;
+        color: white;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 28px;
+        text-decoration: none;
+        box-shadow: 10px 10px 20px rgba(154, 1, 1, 0.5);
+        transition: all 0.3s ease;
+        overflow: hidden;
+      }
+
+      /* Messenger button */
+      .chat-btn.messenger { background-color: #0084ff; }
+      .chat-btn.messenger:hover { background-color: #006fe0; width: 165px; }
+      .chat-btn.messenger:hover .chat-label { opacity: 1; right: 15px; font-size: 13px; }
+      /* WhatsApp button */
+      .chat-btn.whatsapp { background-color: #25d366;
+      }
+      .chat-btn.whatsapp:hover { background-color: #1ebe57; width: 165px; }
+      .chat-btn.whatsapp:hover .chat-label { opacity: 1; right: 15px; font-size: 13px; }
+
+      /* Icon style */
+      .chat-btn i { margin: 0 15px; transition: transform 0.3s ease; }
+
+      /* Label (hidden by default) */
+      .chat-label {
+        position: absolute;
+        right: 60px;
+        opacity: 0;
+        white-space: nowrap;
+        font-size: 15px;
+        font-weight: 500;
+        background-color: transparent;
+        padding: 6px 12px;
+        border-radius: 20px 0 0 20px;
+        transition: all 0.4s ease;
+        color: white;
+      }
+      /* Responsive */
+      @media (max-width: 600px) {
+        .chat-btn { width: 48px; height: 48px;  font-size: 22px; }
+        .chat-btn:hover { width: 140px; }
+        .chat-label { font-size: 13px; }
+      }
+    /* ===== End Floating Messenger ===== */
     
     /* ================== MEDIA QUERIES ================== */
 
@@ -647,6 +710,23 @@
       </ul>
     </div>
   </div>
+  
+  <!-- Floating Messenger/WhatsApp Buttons  -->
+  <div class="chat-float">
+    <!-- Messenger -->
+        <a href="https://www.messenger.com/new" target="_blank" class="chat-btn messenger" title="@ Messenger">
+          <i class="fab fa-facebook-messenger"></i>
+          <span class="chat-label">Chat with us...</span>
+        </a>
+
+    <!-- WhatsApp -->
+        <a href="https://wa.me/971506739688" target="_blank" class="chat-btn whatsapp" title="@ WhatsApp">
+          <i class="fab fa-whatsapp"></i>
+          <span class="chat-label">Chat with us...</span>
+        </a>
+  </div>
+  <!-- End Floating Messenger/WhatsApp Buttons  -->
+
 <script>
   const menuLinks = document.querySelectorAll(".sidebar a");
   const container = document.getElementById("mainContainer");
@@ -734,6 +814,7 @@
 </script>  
 </body>
 </html>
+
 
 
 
