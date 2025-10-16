@@ -32,6 +32,28 @@
        /* ✅ Flexbox fix */
       display: flex;
       flex-direction: column;
+        display: flex;
+      flex-direction: column;
+       /* 🌈 Animated gradient background */
+      background: linear-gradient(135deg, #091520, #032325, #638989);
+      background-size: 300% 300%;
+      animation: gradientFade 12s ease-in-out infinite alternate;
+      transition: all 1s ease-in-out;
+    }
+  /* ✨ Background color fade animation */
+    @keyframes gradientFade {
+      0% {
+        background-position: 0% 50%;
+        background-color: #091520;
+      }
+      50% {
+        background-position: 100% 50%;
+        background-color: #032325;
+      }
+      100% {
+        background-position: 0% 50%;
+        background-color:  #638989;
+      }
     }
   
   .sidebar .profile-pic 
@@ -712,6 +734,7 @@
 </script>  
 </body>
 </html>
+
 
 
 
