@@ -788,8 +788,9 @@
       activeLink = link;
 
       // Load content into #mainContainer
-         
-       if (link.textContent.includes("Career")) {
+       if (link.textContent.includes("Education")) {
+        container.innerHTML = document.getElementById("educationContent").innerHTML;      
+      } else if (link.textContent.includes("Career")) {
        container.innerHTML = document.getElementById("careerSnapshotContent").innerHTML;
       } else if (link.textContent.includes("Skills")) {
         container.innerHTML = document.getElementById("skillsContent").innerHTML;
