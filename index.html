@@ -789,10 +789,9 @@
 
       // Load content into #mainContainer
       
-   //   if (link.textContemt.includes("Main")) {
-   //     container.innerHTML = document.getElementById("mainContainer").innerHTML;
-   //   } else 
-      if (link.textContent.includes("Career")) {
+      if (link.textContemt.includes("Professional")) {
+        container.innerHTML = document.getElementById("mainContainer").innerHTML;
+      } else if (link.textContent.includes("Career")) {
         container.innerHTML = document.getElementById("careerSnapshotContent").innerHTML;
       } else if (link.textContent.includes("Skills")) {
         container.innerHTML = document.getElementById("skillsContent").innerHTML;
