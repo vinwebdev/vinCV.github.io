@@ -1,832 +1,264 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> 
-  <title>My Curriculum Vitae</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      display: flex;
-      height: 98vh;
-      flex-direction: row;
-      overflow-x: hidden;
-    }
-
-/* ✅ FORMATTING SIDEBAR */
-  .sidebar 
-    {
-      width: 300px;
-      background: linear-gradient(135deg, #091520, #104e52);
-      padding: 0px;
-      color: #fff;
-      flex-shrink: 0;
-      transition: transform 0.3s ease-in-out;
-      z-index: 1001;
-      position: fixed;
-      top: 0;
-      height: 100%;
-       /* ✅ Flexbox fix */
-      display: flex;
-      flex-direction: column;
-        display: flex;
-      flex-direction: column;
-       /* 🌈 Animated gradient background */
-         background: linear-gradient(135deg, #75a8d8, #032325, #0f1e1e);
-      background-size: 300% 300%;
-      animation: gradientFade 12s ease-in-out infinite alternate;
-      transition: all 1s ease-in-out;
-    }
-  /* ✨ Background color fade animation */
-    @keyframes gradientFade {
-      0% {
-        background-position: 0% 50%;
-        background-color: #75a8d8;
-      }
-      50% {
-        background-position: 100% 50%;
-        background-color: #032325;
-      }
-      100% {
-        background-position: 0% 50%;
-        background-color: #0f1e1e;
-      }
-    }
-  
-  .sidebar .profile-pic 
-    {
-      width: 100px;           /* adjust size as needed */
-      height: 100px;          /* equal width & height for circle */
-      border-radius: 50%;     /* makes it a circle */
-      object-fit: cover;      /* crop image to fit inside circle */
-      display: block;         /* ensures proper spacing */
-      margin: 15px auto 15px;    /* center horizontally and add spacing below */
-      border: 2px solid #2d3748; /* optional border for nice outline */
-      padding: 2px;
-    }
-  .sidebar h3 
-    {
-      color:white;
-      text-align: center;
-      font-size: 18px;
-    }
-  .sidebar .contactDetails 
-    {               /* Format the contacts & email address */
-      list-style-type: none;   /* Removes the bullet/dot */
-      text-align: center;
-      font-size: 13px;
-      line-height: 1;
-      margin: 0px;
-      padding: 0px;
-    }
-
-/* ✅ FORMATTING LINE between the contact details and sidebar menu  @ SIDEBAR AREA*/
-  .sidebar .sidebar-line 
-    {
-      border: none;               /* remove default browser dotted border */
-      height: .7px;                /* thickness */
-      width: 100%;                 /* shorter than full width */
-      margin: 10px auto;          /* spacing + centered */
-      background: #f8f8f8;
-    }
-
-  #mainContainer.sidebar-line, .card .sidebar-line  /* ✅  LINE inside the mainContainer*/
-    {
-      border: none;               /* remove default browser dotted border */
-      height: .8px;                /* thickness */
-      width: 100%;                 /* shorter than full width */
-      margin: 10px auto;          /* spacing + centered */
-      background-color: #c1bfbf;  /* softer gray */
-    }
-  .sidebar a  /* Sidebar links */
-    {  
-      display: block;
-      padding: 10px;
-      color:#ecf0f1;
-      text-decoration: none;
-      margin: 5px 0;
-      transition: background 0.3s;
-    }
-  .sidebar a:hover 
-    { 
-      background:rgb(205, 255, 224); 
-      color: black;
-    }
-  .sidebar a.active 
-    {  
-      background:rgb(161, 228, 186); 
-      font-size: large; color: black;
-    }
-
-/* ✅ Formatting Social Media Icons */
-/* ✅ Social Media pinned at bottom */
-  .sidebar .cls_socialMedia 
-    {
-      margin-top: auto;    /* pushes it to bottom */
-      padding: 10px 0;
-      background: hsl(0, 0%, 98%);  /* remove the forced white bg */
-      z-index: 2000;
-      position: relative;
-    }
-  .sidebar .social-media 
-    {
-      list-style: none;
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      padding: 0;
-      margin: 0;
-    }
-  .sidebar .social-media li 
-    {
-      margin: 0px;
-      padding-left: 5px;
-      padding-right: 5px;
-      padding-top: 0px;
-    }
-
-  .social-media li a i 
-    {          /* Formatting Each Social Media Icons  */
-      font-size: 2rem;
-      transition: transform 0.2s, color 0.3s;
-    }
-  .sidebar .social-media a 
-    {
-      display: flex;              /* make anchor the clickable box */
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;      /* remove underline */
-      padding: 0px 2px;                 /* reset padding */
-    }
-  .sidebar .social-media i     /* Formatting Each Social Media Icons */
-    {
-      font-size: 1.75rem;
-      transition: color .5s;
-      cursor: pointer;
-    }
-/* Individual brand colors */
-    .linkedin-icon  { color: #0077B5; }
-    .facebook-icon  { color: #3b5999; }
-    .instagram-icon { color: #E4405F; }
-    .youtube-icon   { color: #FF0000; }
-
-/* Hover effects */
-   .social-media li a:hover i 
-      {
-        transform: translateY(-3px); /* small lift */
-        opacity: 0.8;                /* slightly fade */
-      }
-
-/* ✅ FORMATTING Toggle button */
-  .toggle-btn 
-    {
-      display: none;
-      position: absolute;
-      top: 15px;
-      left: 15px;
-      background: linear-gradient(135deg, #091520, #104e52);
-      border: none;
-      color: #fff;
-      padding: 10px 15px;
-      border-radius: 6px;
-      font-size: 18px;
-      cursor: pointer;
-      z-index: 1002;
-    }
-
-/* ✅ FORMATTING Overlay */
-  .overlay 
-    {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-      z-index: 1000;
-      display: none;
-    }
-  .overlay.active { display: block; }
-
-/* ✅ FORMATTING MAIN CONTAINER */
-  #mainContainer 
-   {
-      flex: 1;
-      padding: 20px;
-      background: #eff5fb;
-      overflow-y: auto;
-      transition: all 0.3s ease-in-out;
-    }
-
-  #mainContainer h1
-    {
-      font-size: 25px;
-      padding-top: 0px;
-      padding-bottom: 0px;
-      margin-top: 10px;
-      margin-bottom: 15px;
-    }
-  #mainContainer h2 
-    {
-      font-size: 18px;
-      padding-top: 0px;
-      padding-bottom: 0px;
-      margin-top: 0px;
-      margin-bottom: 0px;
-    }
-  #mainContainer h3
-    {
-        font-size: 20px;
-        font-style: normal;
-        padding-left: 10px;
-        margin-top: 0px;
-        margin-bottom: 0px;
-    }
-    #mainContainer ul{
-        font-size: 16px;
-    }
-    #mainContainer .clsprofessionalCareer{
-        text-align: justify;
-        padding-left: 25px;
-    }
-  
-/* ✅ Fade-in animation */
-    .fade-in { animation: fadeIn 0.5s ease-in-out; }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Hidden sections */
-    .hidden-content { display: none; }
-    .card {
-      background: #fff;
-      padding: 15px;
-      margin-bottom: 15px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    .uls-logo {
-      width: 120px;           /* fixed width */
-      height: 120px;          /* same as width */
-      border-radius: 50%;     /* makes it circular */
-      object-fit: cover;      /* keeps aspect ratio, crops overflow */
-      display: block;         /* needed for margin auto */
-      margin: 15px auto;      /* center image */
-      padding: 2px;           /* framed look */
-    }
-    .ul_careerSnapshot{ line-height: 1.5; }
-    .ul_workArea{ line-height: 1.5; }
-    .ul_technicalArea{ line-height: 1.5; }
-    .ul_coreskillsArea{ line-height: 1.5; }
-    .ul_keystrenght{ line-height: 1.5; }
-    .ul_training{ line-height: 1.5;  }
-    .ul_education{ text-align: center; line-height: .5; }
-    .a_ulswebsite { 
-                    display: inline-block; padding: 10px 18px; background-color: #0066cc;
-                    color: #fff;
-                    text-decoration: none;
-                    font-weight: 600;
-                    border-radius: 8px;
-                    transition: background-color 0.3s, transform 0.2s;
-                }
-
-    .a_ulswebsite:hover {
-            background-color: #004080;
-            transform: translateY(-2px); /* small lift effect */
-    }
-/* ======= Floating Messenger/WhatsApp======= */
-      /* Floating Chat Buttons */
-      .chat-float {
-        position: fixed;
-        bottom: 25px;
-        right: 25px;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        z-index: 9999;
-      }
-
-      /* Chat Button */
-      .chat-btn {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        width: 55px;
-        height: 55px;
-        border-radius: 50px;
-        color: white;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 28px;
-        text-decoration: none;
-        box-shadow: 10px 10px 20px rgba(154, 1, 1, 0.5);
-        transition: all 0.3s ease;
-        overflow: hidden;
-      }
-
-      /* Messenger button */
-      .chat-btn.messenger { background-color: #0084ff; }
-      .chat-btn.messenger:hover { background-color: #006fe0; width: 165px; }
-      .chat-btn.messenger:hover .chat-label { opacity: 1; right: 15px; font-size: 13px; }
-      /* WhatsApp button */
-      .chat-btn.whatsapp { background-color: #25d366;
-      }
-      .chat-btn.whatsapp:hover { background-color: #1ebe57; width: 165px; }
-      .chat-btn.whatsapp:hover .chat-label { opacity: 1; right: 15px; font-size: 13px; }
-
-      /* Icon style */
-      .chat-btn i { margin: 0 15px; transition: transform 0.3s ease; }
-
-      /* Label (hidden by default) */
-      .chat-label {
-        position: absolute;
-        right: 60px;
-        opacity: 0;
-        white-space: nowrap;
-        font-size: 15px;
-        font-weight: 500;
-        background-color: transparent;
-        padding: 6px 12px;
-        border-radius: 20px 0 0 20px;
-        transition: all 0.4s ease;
-        color: white;
-      }
-      /* Responsive */
-      @media (max-width: 600px) {
-        .chat-btn { width: 48px; height: 48px;  font-size: 22px; }
-        .chat-btn:hover { width: 140px; }
-        .chat-label { font-size: 13px; }
-      }
-    /* ===== End Floating Messenger ===== */
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Freight & Logistics Services | Air, Sea & Ground Shipping</title>
+    <meta name="description" content="Reliable global logistics solutions — air freight, ocean freight, ground delivery, customs clearance & warehousing. Get a free quote today.">
     
-    /* ================== MEDIA QUERIES ================== */
-
-    /* Mobile <600px → slide left */
-    @media (max-width: 600px) {
-      .sidebar {left: 0; transform: translateX(-100%);}
-      .sidebar p {display: none;}                   /* Hide the contacts & email - when screen size reach this dimension */
-      .sidebar a {text-align: center;}              /* Adjust the alignment into center position */                                     
-      .sidebar.show { transform: translateX(0); }
-      .toggle-btn { display: block; }
-      #mainContainer { padding-top: 60px; }
-     .ul_education p{ font-size: 10px; }
-    }
-
-    /* Tablets 601–1024px → slide right */
-    @media (min-width: 601px) and (max-width: 1024px) {
-      .sidebar {
-        right: 0;
-        left: auto;
-        width: 220px;
-        font-size: 14px;
-        transform: translateX(100%);
-      }
-      .sidebar .contactDetails {display: none;}                   /* Hide the contacts & email - when screen size reach this dimension */
-      .sidebar a {text-align: center;}              /* Adjust the alignment into center position */
-      .sidebar.show { transform: translateX(0); }
-      .toggle-btn { display: block; }
-      #mainContainer { font-size: 15px; padding-top: 60px; }
-    }
-
-/* Laptops 1025–1440px → always visible */
-    @media (min-width: 1025px) and (max-width: 1440px) 
-      {
-        .sidebar {
-          width: 300px;
-          position: relative;
-          left: 0;
-          transform: translateX(0);
-                }
-        .sidebar hr {margin-top: 10px;}         /* LINE between the contancts/email and sidebar menu */
-        .sidebar a {
-            text-decoration: none;
-            margin: 5px 0;
-            padding-left: 30px;             /* Makes the menu adjust the padding-left:30px from left side */
-                  }
-        .toggle-btn { display: none; }
-        .overlay { display: none !important; }
-        #mainContainer { font-size: 16px; }
-      }
-
-/* Large Desktops ≥1441px */
-    @media (min-width: 1441px) {
-      .sidebar {
-        width: 260px;
-        position: relative;
-        left: 0;
-        transform: translateX(0);
-      }
-      .toggle-btn { display: none; }
-      .overlay { display: none !important; }
-      #mainContainer { font-size: 18px; padding: 40px; }
-    }
-  </style>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
-  <!-- Toggle Button -->
-  <button class="toggle-btn" id="toggleSidebar">☰ Menu</button>
 
-  <!-- Sidebar -->
-  <div class="sidebar" id="sidebar">
-    <img src="images/Profile.png" alt="mypicture" class="profile-pic">
-    <h3>Marvin D. Gonzales</h3>
-    <ul class="contactDetails">
-      <li>Contacts: +971 052 921 0169</li>
-      <li>Email: gonzales.marvin.2015@gmail.com</li>
-    </ul>
-    <hr class="sidebar-line">       <!-- LINE between the contancts/email and sidebar menu -->
-    <a href="#"><i class="fas fa-id-card"></i>&nbsp; Career Snap Shot</a>
-    <a href="#"><i class="fas fa-tools"></i>&nbsp; Skills & Proficiency</a>
-    <a href="#"><i class="fas fa-star"></i>&nbsp;  Key Strengths</a>
-    <a href="#"><i class="fas fa-chalkboard-teacher"></i>&nbsp;  Trainings</a>
-    <a href="#"><i class="fas fa-graduation-cap"></i>&nbsp;  Education</a>
-
-    <div class="cls_socialMedia">
-        <ul class="social-media">
-          <li>
-            <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
-              <i class="fab fa-linkedin linkedin-icon"></i>
+    <header id="siteHeader">
+        <div class="nav-inner">
+            <a href="#top" class="logo">
+                <img src="images/ASL Logo-image.png" alt="Air & Sea Logistics Logo">
+                <span>AIR & SEA Logistics</span>
             </a>
-          </li>
-          <li>
-            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
-              <i class="fab fa-facebook-square facebook-icon"></i>
-            </a>
-          </li>
-          <li>
-            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
-              <i class="fab fa-instagram instagram-icon"></i>
-            </a>
-          </li>
-          <li>
-            <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">
-              <i class="fab fa-youtube youtube-icon"></i>
-            </a>
-          </li>
-        </ul>
-    </div>
-  </div>
-
-  <!-- Overlay -->
-  <div class="overlay" id="overlay"></div>
-
-  <!-- Main Content -->
-  <div id="mainContainer" class="cls_mainContainer">
-    <h1>Professional career</h2>
-      <p class="clsprofessionalCareer">Dedicated Professional, with over 9 years’ experience in Warehouse Management, Planning and Innovation, Logistics Documentation and
-        Inventory Management, Data Analysis and Forecasting, Administrative positions, with high support and relations with fellow staff. Flexible, quick
-        learner who adapts easily to new situations and enjoys a challenge with ability to interact with cross-functional departments, with high degree of
-        professionalism, discretion and problem resolution capabilities. Ability to diplomatically resolve concerns and diffuse tension. Willing to join a
-        successful oriented corporation with an opportunity to enhance my skills and contribute to the growth of the organization.</p>
-    <hr class="sidebar-line">       <!-- LINE -->
-      <h2>Move Manager (2020- Present)</h2>
-      <h3>Air and Sea Logistics LLC</h3>
-    <hr class="sidebar-line">       <!-- LINE -->
-      <ul>
-          <li>Conduct pre move surveys and assess volume including estimate and cost the move process.</li>
-          <li>Received approved jobs from sales department for booking schedule then identify and validate all associated paperwork’s/requirements in the move.</li>
-          <li>Consistent in touch to clients until move process end/delivery done and main contractors that directly received jobs from Operations</li>
-          <li>Manager/Warehouse Manager of Allied Pickfords and Sta Fe Relocation and perform export, import jobs and analyze the needed requirements based on
-              the given job instructions which guided by service level agreement of both parties.</li>
-          <li>Help to conduct marketing strategies, leads for sales increase and department profit.</li>
-          <li>Maintaining, updating of all records of the department for future references and auditing purposes.</li>
-          <li>Follow and implement policies, procedures to maximize output and meet target objective.</li>
-          <li>Prepare, analyze and submit summary job reports to Managing Director about the department and operational issues, progress, plans and strategies.</li>
-          <li>Plan effective strategies, utilizes financial data to improve profitability including control inventories through monitoring of materials and other resources.</li>
-      </ul>
-      <hr class="sidebar-line">       <!-- LINE -->
-        <h2>Warehouse Manager (2017- 2020)</h2>
-        <h3>Airland Logistics LLC, Dubai U.A.E</h3>
-      <hr class="sidebar-line">       <!-- LINE -->
-      <ul>
-          <li>Manage and oversee the warehouse activities to ensure efficient and effective operations of the warehouse.</li>
-          <li>Manage customer service requests promptly from both departments Logistics/Relocation and resolve issues quickly.</li>
-          <li>Monitor and keep accurate record of inbound and outbound stuffs both house hold goods and commercial goods, relocation materials, as well as keep record of damaged and returned items/materials.</li>
-          <li>Analyzes in and out activities in warehouse such as deliveries, client request items to determine changes that could affect delivery schedule and other works, subsequently monitoring of relocation export packing job (Air
-              shipment/Sea shipment) cross checking of goods from papers to actual items including damages.</li>
-          <li>Manage and control inventories of storage items such as house hold goods under relocation department, commercial goods under logistics department and corporate account, relocation materials, summarizing and give report to
-              Managing Director.</li>
-          <li>Finding inventory solutions in storage items (inbound / outbound) using software skills.</li>
-          <li>Maintaining, updating records whether soft copy or hard copy for job references and auditing purposes.</li>
-          <li>Track the movement of team to make sure that the goods/stuffs are sent or delivered in a timely manner.</li>
-          <li>Ensure spacious and efficient layout of the warehouse and inform the warehouse crews of stock level and when to replenish the stocks, items, materials.</li>
-          <li>Make sure that the warehouse and items, materials are safe and secure as well as fragile materials are safely packed, stored and Implement safety standard rules and procedures in warehouse including cleanliness of the premises.</li>
-          <li>Identifying low cost material suppliers with high quality to increase profit from each rendered service.</li>
-      </ul>
-      <hr class="sidebar-line">       <!-- LINE -->
-        <h2>Warehouse Manager (2015- 2017)</h2>
-        <h3>CMG International Movers and Cargo, Dubai U.A.E</h3>
-      <hr class="sidebar-line">       <!-- LINE -->
-      <ul>
-          <li>Oversee supervise warehouse activities to ensure efficient and effective operations of the warehouse.</li>
-          <li>Monitor the inbound and outbound cargo in warehouse including the items for long and short term rental storage.</li>
-          <li>Keep records accurately in all activities in the warehouse including the damaged and returned items/materials.</li>
-          <li>Analyzes the work orders, schedule of deliveries and identify the changes that could affect delivery schedule including monitoring of shipment for
-              export loading such as Kabayan boxes bound to Philippines, Household Goods and Commercial Goods bound to Europe, Asia, Africa and Western Country.</li>
-          <li>Conduct inventories of goods (import, export, storage, materials) that is present in warehouse premises, including technical maintenance tools, and
-              summarizing, creating reports to Accounts and Managing Director.</li>
-          <li>Monitor or track the movement of the team to make sure that the items are sent in a timely manner.</li>
-          <li>Ensure spacious and efficient layout of the warehouse and inform the warehouse crews of stock level and when to replenish the stocks, items, materials.</li>
-          <li>Make sure that the warehouse and items, materials are safe and secure as well as fragile materials are safely packed and stored.</li>
-          <li>Implement safety standard rules and procedures in warehouse including cleanliness Data Analytics - MS Excel Professional of the premises.</li>   
-      </ul>
-      <hr class="sidebar-line">       <!-- LINE -->
-        <h2>Operations Manager (2014- 2015)</h2>
-        <h3>CMG International Movers and Cargo, Dubai U.A.E</h3>
-      <hr class="sidebar-line">       <!-- LINE -->
-      <ul>
-          <li>Managing the smooth task/schedule of the operations under relocation and cargo team as well as optimizing the use of resources, including personnel, equipment, 
-              and budget to surely align and meet operational goals efficiently.</li>
-          <li>Conduct survey and assess volume of moving clients, estimate time frame, operational cost, identify any possible difficulties such as access, special
-              requirements request by the client.</li>
-          <li>Received approved jobs from sales department for booking schedule and identify, validate all necessary requirements in the operations and if needed,
-              advise the sales team, move coordinators regarding requirements for productivity, quality and service improvement of the team.</li>
-          <li>Directly received jobs from Operations Manager/Warehouse Manager of Allied Pickfords, Sta Fe Relocation to perform export, import jobs and
-              analyze needed requirements based on the given docket or job instructions which guided by service level agreement of both parties.</li>
-          <li>Distinguish, analyze and assign workload schedules of team based on their skills, capacity and crew availability including estimations of moving costs.</li>
-          <li>Coordinate and attend to a given contractors training as per service level agreement and standard operating procedures required by main contractors
-              such as Allied Pickfords, Sta Fe Relocation.</li>
-          <li>Coordinate, manage, monitor the works of various crews/team in fields including office coordination, check possible issues and other urgent
-              requirements during and after work for immediate response, preparation and solution.</li>
-          <li>Evaluate jobs performed by team, crews, trace weaknesses and develop strategies of improvements and crew’s productivity to ensure quality of services.</li>
-          <li>Follow and implement policies, procedures to maximize output and meet target objective.</li>
-          <li>Monitor and manage needed resources of the team/department such as materials, trucks, cars, tools.</li>
-          <li>Prepare reports, invoices, SOA and other documents needed under CMG International Movers.</li>
-          <li>Prepare and give reports to top management about operational issues, progress, plans and strategies.</li>
-          <li>Conducting data analyzation for relocation team and cargo team related to operations to make informed decisions and drive continuous improvement.</li>
-          <li>Analyze and submit summary job report of moving jobs/works for financial, productivity purposes.</li>
-          <li>Plan effective strategies, utilizes financial data to improve profitability including control inventories through monitoring of materials and other resources.</li>
-          <li>Assist cargo team from crews to supervisor for dissemination of team, packing training, correct handling of items, volume assessment and price estimation of cargo items, 
-              shipment schedules from requesting of container to cargo loading.</li>
-
-      </ul>
-      <hr class="sidebar-line">       <!-- LINE -->
-        <h2>Sales Executive Cum Coordinator (2013- 2014)</h2>
-        <h3>CMG International Movers and Cargo, Dubai U.A.E</h3>
-      <hr class="sidebar-line">       <!-- LINE -->
-      <ul>
-          <li>Conduct survey and assess volume of moving clients, estimate time frame, operational cost, identify any possible difficulties such as access, special requirements request by the client.</li>
-          <li>Directly received jobs from Operations Manager/Warehouse Manager of Allied Pickfords, Sta Fe Relocation to perform export, import jobs and analyze needed requirements 
-              based on the given docket or job instructions which guided by service level agreement of both parties.</li>
-          <li>Distinguish, analyze and assign workload schedules of team based on their skills, capacity and crew availability including estimations of moving costs.</li>
-          <li>Coordinate, manage, monitor the works of various crews/team in fields including office coordination, check possible issues and other urgent
-              requirements during and after work for immediate response, preparation and solution.</li>
-          <li>Ensure work is attained in responsive way complying to set quality safety guidelines and standards required by affiliated companies such as Exclusive
-              Links Real State, Allied Pickford’s Relocation and Sta Fe Relocation.</li>
-          <li>Prepare reports, invoices, SOA and other documents needed under CMG Technical and Cleaning Services LLC works to affiliated company contractor
-              such as Exclusive Links Real State.</li>
-      </ul>
-      <hr class="sidebar-line">       <!-- LINE -->
-        <h2>IT Instructor (2001- 2013)</h2>
-        <h3>St. John Berchman's High School, Isabela Cagayan Valley, Philippines</h3>
-      <hr class="sidebar-line">       <!-- LINE -->
-      <ul>
-          <li>Practice excellence in teaching, instruction and develop the technological aspects of the students and colleagues/teachers,</li>
-          <li>Give different activities and guide students in using basic and advance functions of new programs such as application 
-              software’s, web development & operating system.</li>
-          <li>Uses different software applications based on the curriculum of all level under secondary level and provides advance training 
-              and seminars for the staff through software workshops related to their field of specification.</li>
-          <li>Facilitate the staff/teachers regarding the use of computers for classroom management, lesson objective implementation 
-              based on the curriculum.</li>
-          <li>Works cooperatively with other teachers in planning a balanced curricular program, adapting schedules.</li>
-          <li>Plans, implements, monitors and assesses the instructional program, which is consistent with board goals 
-              and school vision, mission based on assessments of student needs.</li>
-          <li>Evaluates each pupil’s progress in skills and prepares progress reports.</li>
-          <li>Maintains professional competence through participation in software and hardware trainings and in education 
-              workshops provided by the school and/or in self-selected professional growth activities.</li>
-          <li>Conduct program proposal and write a modified system for teachers, staff and students like grading system.</li>
-          <li>Perform or direct revision or repair of existing programs to increase operating efficiency or adapt to new requirements.</li>
-      </ul>
-  </div>
-
-<!-- Hidden Sections -->
-<!-- FIRST SIDEBAR MENU -->
-<div id="careerSnapshotContent" class="hidden-content">
-      <div class="card">
-       <h3><i class="fas fa-briefcase"></i>&nbsp; Career Snap Shot</h3>
-        <hr class="sidebar-line">       <!-- LINE -->
-        <ul class="ul_careerSnapshot">
-          <li>Move Manager & Logistics Documentation Air and Sea Logistics LLC Dubai, U.A.E</li>
-          <li>Warehouse Manager Airland Logistics LLC Dubai, U.A.E</li>
-          <li>Warehouse Manager CMG International Movers and Cargo Services LLC Dubai, U.A.E</li>
-          <li>Operations Manager CMG International Movers and Cargo Services LLC Dubai, U.A.E</li>
-          <li>Sales Executive Cum Surveyor, CMG International Movers and Cargo Services LLC, Dubai, U.A.E</li>
-          <li>Computer Laboratory Manager, St. John Berchman's, Philippines </li>
-          <li>IT Instructor, St. John Berchman's, Philippines</li>
-        </ul>
-      </div>
-</div>
-
-  <div id="skillsContent" class="hidden-content">   
-        <div class="card">
-            <h3><i class="fas fa-briefcase"></i>&nbsp; Work Area</h3>
-            <hr class="sidebar-line">       <!-- LINE -->
-            <ul class="ul_workArea">
-              <li>Warehouse Management</li>
-              <li>Logistic Documentation and Inventory Control Management</li>
-              <li>Planning , Strategy and Innovation</li>
-              <li>Stocks, Cost & Space Forecasting</li>
-              <li>Company Goal Alignment</li>
-              <li>Data Analysis and Forecasting</li>
-            </ul>
+            <nav class="nav-links">
+                <a href="#services">Services</a>
+                <a href="#trust">Testimonials</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <div class="nav-cta">
+                <a href="#contact" class="btn btn-primary">Get a Free Quote</a>
+                <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
         </div>
-        <div class="card">
-            <h3><i class="fas fa-microchip"></i>&nbsp; Technical Area</h3>
-              <hr class="sidebar-line">       <!-- LINE -->
-              <ul class="ul_technicalArea">
-                <li>Data Analytics - Microsoft Excel</il>
-                <li>Professional Data Analytics</il>
-                <li>Data Analytics (Data Visualization and Story-Telling) Microsoft Excel</il>
-                <li>Visual Basic Application in MS Excel Programming</il>
-                <li>Web Development - Front End Web</il>
-                <li>Developer (HTML, CSS) / Back End (Basic Java Script, PHP, MySQL)</il>
-                <li>Software Application MS Office (Word, Excel, Outlook, Powerpoint, Access)</il>
-                <li>Operating System - Windows OS</il>
-              </ul>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#services">Services</a>
+        <a href="#trust">Testimonials</a>
+        <a href="#contact">Contact</a>
+        <a href="#contact" class="btn btn-primary">Get a Free Quote</a>
+    </div>
+
+    <main id="top">
+        <!-- HERO -->
+        <section class="hero" aria-label="Introduction">
+            <div class="hero-inner">
+                <div class="hero-content reveal">
+                    <span class="eyebrow">Seamless Global Relocation. Trusted Local Expertise.</span>
+                    <h1>Planning to Move?</h1>
+                    <div class="hero-card-container">
+                        <div class="service-card video-card">
+                            <video class="bg-video" autoplay muted loop playsinline>
+                                <source src="video/video1.mp4" type="video/mp4">
+                                Your browser does not support HTML5 video.
+                            </video>
+                            <div class="video-overlay"></div>
+                            <div class="content">
+                                <p>Our experienced team provides safe packing, secure transportation, careful loading & unloading, and complete relocation solutions—making your move simple from start to finish. 🚚📦</p>
+                                <h2>Let the Experts Handle It!</h2>
+                                <div class="hero-ctas">
+                                    <a href="#contact" class="btn btn-primary">Get a Free Quote</a>
+                                    <a href="https://wa.me/971556598756?text=Hi%20Air%20%26%20Sea%20Logistics%2C%20I%27d%20like%20to%20get%20a%20quote%20for%20my%20move."
+                                       class="btn btn-secondary whatsapp-btn"
+                                       target="_blank" rel="noopener noreferrer"
+                                       data-whatsapp-phone="971556598756"
+                                       data-whatsapp-message="Hi Air & Sea Logistics, I'd like to get a quote for my move.">
+                                        Chat with Us on WhatsApp
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- QUICK CTA -->
+        <section class="cta-quick">
+            <div class="container reveal">
+                <h2>Ready to Move Smarter?</h2>
+                <div class="cta-buttons">
+                    <a href="tel:+97148895950" class="btn btn-tertiary">Call Now: +971 4 889 5950</a>
+                </div>
+                <div class="cta-micro">Get fast, reliable support from our experienced team.</div>
+            </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section class="services" id="services">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="eyebrow">Projects</span>
+                    <h2>Our Expertise in Action</h2>
+                    <p>Showcases the quality, skill, and dedication behind every project we deliver. It highlights our proven ability to provide reliable solutions, ensuring excellence, efficiency, and customer satisfaction in every service we offer.</p>
+                </div>
+                <div class="services-grid">
+                    <!-- Service 1: Video -->
+                    <div class="service-card reveal video-card">
+                        <video class="bg-video" autoplay muted loop playsinline>
+                            <source src="video/videoA.mp4" type="video/mp4">
+                            Your browser does not support HTML5 video.
+                        </video>
+                        <div class="video-overlay"></div>
+                        <div class="content">
+                            <h3>Apple Middle East</h3>
+                            <p>Priority air cargo for time-sensitive and high-value shipments across major global routes.</p>
+                        </div>
+                    </div>
+
+                    <!-- Service 2: Slider -->
+                    <div class="service-card reveal has-slider"
+                         data-slides="images/EXO1.jpg,images/EXO2.jpg,images/EXO3.jpg,images/EXO4.jpg,images/EXO5.jpg"
+                         data-interval="4000"
+                         data-speed="1200">
+                        <div class="content">
+                            <h3>PACKING | EXPORT: House Hold Goods</h3>
+                            <p>Cost-effective FCL and LCL shipping across all major shipping lanes worldwide.</p>
+                        </div>
+                    </div>
+
+                    <!-- Service 3: Slider -->
+                    <div class="service-card reveal has-slider"
+                         data-slides="images/WH1.jpg,images/WH2.jpg,images/WH3.jpg,images/WH4.jpg,images/WH5.jpg,images/WH6.jpg,images/WH7.jpg"
+                         data-interval="4000"
+                         data-speed="1200">
+                        <div class="content">
+                            <h3>STORAGE | WAREHOUSING</h3>
+                            <p>Reliable trucking networks that get your goods from port to door, on schedule.</p>
+                        </div>
+                    </div>
+
+                    <!-- Service 4: Slider -->
+                    <div class="service-card reveal has-slider"
+                         data-slides="images/WC1.jpg,images/WC2.jpg,images/WC3.jpg,images/WC4.jpg,images/WC5.jpg,images/WC6.jpg,images/WC7.jpg,images/WC8.jpg,images/WC9.jpg,images/WC10.jpg,images/WC11.jpg,images/WC12.jpg"
+                         data-interval="4000"
+                         data-speed="1200">
+                        <div class="content">
+                            <h3>CRATING | EXPORT: CAR & MOTORBIKE</h3>
+                            <p>Secure, strategically located storage with inventory management and fast fulfillment.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA MID -->
+        <section class="cta-mid">
+            <div class="container reveal">
+                <h2>Ready to Move Smarter & for Quick Discussion?</h2>
+                <div class="cta-buttons">
+                    <a href="tel:+971556598756" class="btn btn-tertiary">Call Now: +971 55 659 8756</a>
+                    <a href="https://wa.me/971556598756?text=Hi%20Air%20%26%20Sea%20Logistics%2C%20I%27d%20like%20to%20get%20a%20quote%20for%20my%20move."
+                       class="btn btn-secondary whatsapp-btn"
+                       target="_blank" rel="noopener noreferrer"
+                       data-whatsapp-phone="971556598756"
+                       data-whatsapp-message="Hi Air & Sea Logistics, I'd like to get a quote for my move.">
+                        Chat with Us on WhatsApp
+                    </a>
+                </div>
+                <div class="cta-micro">Get fast, reliable support from our experienced team.</div>
+            </div>
+        </section>
+
+        <!-- TRUST / TESTIMONIALS -->
+        <section class="trust-section" id="trust">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="eyebrow">Real Stories from Happy Customers</span>
+                    <h2>Trusted by Families and Businesses Across the UAE</h2>
+                </div>
+                <div class="testimonials">
+                    <div class="t-card reveal">
+                        <div class="stars">★★★★★</div>
+                        <p>"Switching our freight partner was the best operational decision we made this year. Deliveries are faster, and communication is outstanding."</p>
+                        <div class="author">Operations Director, Retail Distribution Company</div>
+                    </div>
+                    <div class="t-card reveal">
+                        <div class="stars">★★★★★</div>
+                        <p>"Their customs team saved us weeks of delays. We finally have a logistics partner we can rely on."</p>
+                        <div class="author">Logistics Manager, E-commerce Group</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section class="contact" id="contact">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="eyebrow">Get In Touch</span>
+                    <h2>Let's Plan Your Move</h2>
+                    <p>Reach out — our team responds fast.</p>
+                </div>
+
+                <div class="contact-inner reveal">
+                    <form class="form-card" id="quoteForm">
+                        <div class="form-row">
+                            <div class="field">
+                                <label for="fullName">Full Name</label>
+                                <input id="fullName" name="fullName" type="text" placeholder="Jane Doe" required>
+                            </div>
+                            <div class="field">
+                                <label for="company">Company Name</label>
+                                <input id="company" name="company" type="text" placeholder="Your Company Ltd.">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="field">
+                                <label for="email">Email Address</label>
+                                <input id="email" name="email" type="email" placeholder="you@company.com" required>
+                            </div>
+                            <div class="field">
+                                <label for="phone">Phone Number</label>
+                                <input id="phone" name="phone" type="tel" placeholder="+971 00 000 0000">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="field full">
+                                <label for="shipmentType">Shipment Type</label>
+                                <select id="shipmentType" name="shipmentType">
+                                    <option value="Air Freight">Air Freight</option>
+                                    <option value="Ocean Freight">Ocean Freight</option>
+                                    <option value="Ground Delivery">Ground Delivery</option>
+                                    <option value="Warehousing">Warehousing</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="field full">
+                                <label for="message">Message / Shipment Details</label>
+                                <textarea id="message" name="message" placeholder="Tell us about your shipment or move — date, origin, destination, size, and timeline."></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="submitBtn">Request a Quote</button>
+                        <p class="form-note" id="formNote">We typically respond within 1 business hour.</p>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <a href="#top" class="logo">Air & Sea Logistics LLC<span class="dot">.</span></a>
+            <div class="footer-links">
+                <a href="#services">Services</a>
+                <a href="#trust">Testimonials</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="copyright">© 2026 Air & Sea Logistics LLC. All rights reserved.</div>
         </div>
-        <div class="card">
-            <h3><i class="fas fa-lightbulb"></i>&nbsp; Core Skills Area</h3>
-              <hr class="sidebar-line">       <!-- LINE -->
-              <ul class="ul_coreskillsArea">
-                <li>Leadership, Collaboration and Teamwork</il>
-                <li>Time Management</il>
-                <li>Leadership skills</il>
-                <li>Organizational and ability to motivate and train others.</il>
-                <li>Numerical skills and Technical skills.</il>
-                <li>IT skills and the ability to learn new IT packages.</il>
-              </ul>
-        </div>
-  </div>
+    </footer>
 
-<!-- SECOND SIDEBAR MENU -->
-  <div id="keystrengthsContent" class="hidden-content"> 
-    <div class="card">
-     <h3><i class="fas fa-bolt"></i>&nbsp; Key Strengths</h3>
-      <hr class="sidebar-line">       <!-- LINE -->
-      <ul class="ul_keystrenght">
-        <li>Diligent, multifaceted, trustworthy</il>
-        <li>Proactive and has a positive working attitude</il>
-        <li>Problem solver, Patient, flexible</il>
-        <li>Inter-personal skills</il>
-        <li>Ability to work efficiently and dependable</il>
-        <li>Highly motivated and disciplined to learn independently</il>
-        <li>Initiative and resourcefulness in meeting job requirements and objectives</il>
-      </ul>
-    </div>
-  </div>
-
-<!-- THIRD SIDEBAR MENU -->
-  <div id="trainingContent" class="hidden-content">  
-    <div class="card">
-      <h3><i class="fas fa-book-open"></i>&nbsp; Studies and Trainings</h3>
-      <hr class="sidebar-line">       <!-- LINE -->
-      <ul class="ul_training">
-        <li>Freight Broker Virtual Assistant</li>
-          <a href="https://www.facebook.com/freightcourses101/" target="_blank" rel="noopener noreferrer" class="a_ulswebsite">visit Freightcourses101</a>        
-        <li>Scale with AI</li>
-          <a href="https://www.facebook.com/jayjazminesofficial" target="_blank" rel="noopener noreferrer" class="a_ulswebsite">visit Equip Your Business with AI</a>            
-        <li>Data Analytics - MS Excel Professional Data Analysis/DataViz and Storytelling with Data</li>
-          <a href="https://datasenseph.com/" target="_blank" rel="noopener noreferrer" class="a_ulswebsite">visit datasenseph</a>        
-        <li>Full Stack Web Development</li>
-          <a href="https://learncomputertoday.net/" target="_blank" rel="noopener noreferrer" class="a_ulswebsite">visit learncomputertoday</a>        
-        <li>Customer Service Fundamentals (Certificate - Verified link https://coursera.org/verify/QT5J2PM5CGBF) Coursera Online Course Provider</li>
-          <a href="https://www.coursera.org/" target="_blank" rel="noopener noreferrer" class="a_ulswebsite">visit Coursera</a>               
-        <li>Logistics and Warehouse Management (Certificate – KHDA Certified) Filipino Institute, Burjuman Branch Dubai</li>
-          <a href="https://www.filipino-institute.com/" target="_blank" rel="noopener noreferrer" class="a_ulswebsite">visit Filipino Institute</a>        
-      </ul>
-    </div>
-  </div>
-
-<!-- FOURTH SIDEBAR MENU -->
-  <div id="educationContent" class="hidden-content">  
-    <div class="card">
-      <h3><i class="fas fa-university"></i>&nbsp; Educational Background</h3>
-      <hr class="sidebar-line">       <!-- LINE -->
-      <img src="images/ULS Logo.jpg" alt="logo" class="uls-logo">
-      <ul class="ul_education">
-        <p>Bachelor of Science in Computer Information Science</p>
-        <p>University of La Salette</p>
-        <p>Santiago City, Philippines</p>
-        <br>
-        <a href="https://uls.edu.ph/" target="_blank" rel="noopener noreferrer" class="a_ulswebsite">visit ULS Website</a>
-      </ul>
-    </div>
-  </div>
-  
-  <!-- Floating Messenger/WhatsApp Buttons  -->
-  <div class="chat-float">
-    <!-- Messenger -->
-        <a href="https://www.messenger.com/new" target="_blank" class="chat-btn messenger" title="@ Messenger">
-          <i class="fab fa-facebook-messenger"></i>
-          <span class="chat-label">Chat with us...</span>
-        </a>
-
-    <!-- WhatsApp -->
-        <a href="https://wa.me/971506739688" target="_blank" class="chat-btn whatsapp" title="@ WhatsApp">
-          <i class="fab fa-whatsapp"></i>
-          <span class="chat-label">Chat with us...</span>
-        </a>
-  </div>
-  <!-- End Floating Messenger/WhatsApp Buttons  -->
-
-<script>
-  const menuLinks = document.querySelectorAll(".sidebar a");
-  const container = document.getElementById("mainContainer");
-  const sidebar = document.getElementById("sidebar");
-  const toggleBtn = document.getElementById("toggleSidebar");
-  const overlay = document.getElementById("overlay");
-  let activeLink = null;
-
-  // Save the original/default content of #mainContainer
-  const defaultContent = container.innerHTML;
-
-  // Toggle sidebar (mobile + tablet)
-  toggleBtn.addEventListener("click", () => {
-    sidebar.classList.toggle("show");
-    overlay.classList.toggle("active");
-  });
-
-  // Close sidebar if overlay clicked
-  overlay.addEventListener("click", () => {
-    sidebar.classList.remove("show");
-    overlay.classList.remove("active");
-  });
-
-  // Handle menu clicks
-  menuLinks.forEach(link => {
-    link.addEventListener("click", (e) => {
-      // ✅ Allow normal behavior for social media links
-      if (link.closest(".social-media")) {
-        if (window.innerWidth <= 1024) {
-          sidebar.classList.remove("show");
-          overlay.classList.remove("active");
-        }
-        return; // do not block external links
-      }
-
-      // Prevent default only for internal sidebar links
-      e.preventDefault();
-
-      // Deselect if already active
-      if (activeLink === link) {
-        link.classList.remove("active");
-        activeLink = null;
-
-        // Restore the original #mainContainer content
-        container.innerHTML = defaultContent;
-
-        // Hide sidebar/overlay on small screens
-        sidebar.classList.remove("show");
-        overlay.classList.remove("active");
-        return;
-      }
-
-      // Remove active from all
-      menuLinks.forEach(l => l.classList.remove("active"));
-
-      // Mark current active
-      link.classList.add("active");
-      activeLink = link;
-
-      // Load content into #mainContainer
-        if (link.textContent.includes("Career")) {
-       container.innerHTML = document.getElementById("careerSnapshotContent").innerHTML;
-      } else if (link.textContent.includes("Skills")) {
-        container.innerHTML = document.getElementById("skillsContent").innerHTML;
-      } else if (link.textContent.includes("Key")) {
-        container.innerHTML = document.getElementById("keystrengthsContent").innerHTML;
-      } else if (link.textContent.includes("Trainings")) {
-        container.innerHTML = document.getElementById("trainingContent").innerHTML;
-      } else if (link.textContent.includes("Education")) {
-        container.innerHTML = document.getElementById("educationContent").innerHTML;
-      }
-
-      // Fade in animation
-      container.classList.remove("fade-in");
-      void container.offsetWidth; // reflow trick
-      container.classList.add("fade-in");
-
-      // Auto-close sidebar on small screens
-      if (window.innerWidth <= 1024) {
-        sidebar.classList.remove("show");
-        overlay.classList.remove("active");
-      }
-    });
-  });
-</script>  
+    <!-- Scripts -->
+    <script src="js/script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
